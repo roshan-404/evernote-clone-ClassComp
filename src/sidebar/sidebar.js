@@ -62,7 +62,7 @@ class SidebarComponent extends React.Component {
                 )
         }
         else {
-            return(<div>Add a note!</div> )
+            return(<div></div> )
         }
     }
  
@@ -79,8 +79,8 @@ class SidebarComponent extends React.Component {
     selectNote = (n, i ) => {
         this.props.selectNote(n, i)
     }
-    deleteNote = () => {
-        console.log("delete note")
+    deleteNote = (note) => {
+        this.props.deleteNote(note)
     }
 }
 
