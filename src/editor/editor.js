@@ -4,12 +4,17 @@ import debounce from '../helpers';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-import { render } from '@testing-library/react';
 
 class EditorComponent extends React.Component {
     constructor() {
         super();
+        this.state = {
+            text: '',
+            title: '',
+            id: ''
+        }
     }
+
     render() {
 
         const { classes } = this.props;
@@ -22,6 +27,13 @@ class EditorComponent extends React.Component {
         </div>
      )
     }
+    updateBody = async (val) => {
+        await this.setState({ text: val})
+        this.update();
+    }
+    update = debounce(() => {
+        console.log("updajddol data ")
+    }, 1500);
 }
 
 export default withStyles(styles)(EditorComponent)

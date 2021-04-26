@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { firebase } from '@firebase/app';
+import 'react-quill/dist/quill.snow.css';
 import  EditorComponent from "./editor/editor"
 import SidebarComponent from "./sidebar/sidebar"
 
@@ -19,7 +20,13 @@ class App extends React.Component {
     return (
     <div className="app-container">
       
-      <SidebarComponent></SidebarComponent>
+      <SidebarComponent 
+        selectedNoteIndex={this.state.selectedNoteIndex}
+        notes={this.state.notes}
+        deleteNote={this.deleteNote}
+        selectNote={this.selectNote}
+        newNote={this.newNote}>
+      </SidebarComponent>
       <EditorComponent></EditorComponent>
     </div>
     )
@@ -39,6 +46,8 @@ class App extends React.Component {
           this.setState({ notes: notes})
       });
   }
+
+  selectNote= (note, index) => this.setState({ selectedNoteIndex: index, selectNote: note})
 }
 
 export default App;
