@@ -27,7 +27,15 @@ class App extends React.Component {
         selectNote={this.selectNote}
         newNote={this.newNote}>
       </SidebarComponent>
-      <EditorComponent></EditorComponent>
+      {
+        this.state.selectedNote ? 
+        <EditorComponent selectedNote={this.state.selectedNote}
+        selectedNoteIndex={this.state.selectedNoteIndex}
+        notes={this.state.notes}
+        noteUpdate={this.noteUpdate}></EditorComponent> : 
+        null
+      }
+      
     </div>
     )
   }
@@ -47,7 +55,33 @@ class App extends React.Component {
       });
   }
 
-  selectNote= (note, index) => this.setState({ selectedNoteIndex: index, selectNote: note})
+  selectNote= (note, index) => this.setState({ selectedNoteIndex: index, selectedNote: note})
+  noteUpdate = (id , noteObj) => {
+    firebase
+      .firestore()
+      .collection('notes')
+      .doc(id)
+      .update({
+        title: noteObj.title,
+        body: noteObj.body,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      })
+  }
+
+  newNote= async (title) => { 
+    const note = {
+      title: title,
+      body: ''
+    }
+    const newFromDB = await firebase
+      .firestore()
+      .collection('notes')
+      .add({
+        title: note.title,
+        body: note.body,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      })
+  }
 }
 
 export default App;
