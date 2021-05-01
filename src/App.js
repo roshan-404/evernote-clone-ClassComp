@@ -18,25 +18,41 @@ class App extends React.Component {
 
   render() {
     return (
-    <div className="app-container">
+      <div className="flex-container">
+          <div className="header">
+             <h2>EVERNOTE</h2>            
+            <img
+                className="header__logo"
+                // src="https://logos-world.net/wp-content/uploads/2020/09/Tinder-Emblem.png"
+                src = "https://img.icons8.com/clouds/100/000000/notes-app.png"
+                alt=""
+            />
+            {/* <Button>
+            <ForumIcon fontSize='large' className="header__icon" ></ForumIcon>
+            </Button> */}
+            
+          </div>
+          <div className="app-container">
       
-      <SidebarComponent 
-        selectedNoteIndex={this.state.selectedNoteIndex}
-        notes={this.state.notes}
-        deleteNote={this.deleteNote}
-        selectNote={this.selectNote}
-        newNote={this.newNote}>
-      </SidebarComponent>
-      {
-        this.state.selectedNote ? 
-        <EditorComponent selectedNote={this.state.selectedNote}
-        selectedNoteIndex={this.state.selectedNoteIndex}
-        notes={this.state.notes}
-        noteUpdate={this.noteUpdate}></EditorComponent> : 
-        null
-      }
+            <SidebarComponent 
+              selectedNoteIndex={this.state.selectedNoteIndex}
+              notes={this.state.notes}
+              deleteNote={this.deleteNote}
+              selectNote={this.selectNote}
+              newNote={this.newNote}>
+            </SidebarComponent>
+            {
+              this.state.selectedNote ? 
+              <EditorComponent selectedNote={this.state.selectedNote}
+              selectedNoteIndex={this.state.selectedNoteIndex}
+              notes={this.state.notes}
+              noteUpdate={this.noteUpdate}></EditorComponent> : 
+              null
+            }
       
-    </div>
+          </div>
+      </div>
+   
     )
   }
 
